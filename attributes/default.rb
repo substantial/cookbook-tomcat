@@ -23,7 +23,7 @@ default["tomcat"]["java_options"] = "-Xmx128M -Djava.awt.headless=true"
 default["tomcat"]["use_security_manager"] = false
 
 case platform
-when "centos","redhat","fedora"
+when "amazon","centos","redhat","scientific","fedora"
   set["tomcat"]["user"] = "tomcat"
   set["tomcat"]["group"] = "tomcat"
   set["tomcat"]["home"] = "/usr/share/tomcat6"

@@ -37,7 +37,7 @@ end
 service "tomcat" do
   service_name "tomcat6"
   case node["platform"]
-  when "centos","redhat","fedora"
+  when "amazon","centos","redhat","scientific","fedora"
     supports :restart => true, :status => true
   when "debian","ubuntu"
     supports :restart => true, :reload => true, :status => true
@@ -46,7 +46,7 @@ service "tomcat" do
 end
 
 case node["platform"]
-when "centos","redhat","fedora"
+when "amazon","centos","redhat","scientific","fedora"
   template "/etc/sysconfig/tomcat6" do
     source "sysconfig_tomcat6.erb"
     owner "root"
