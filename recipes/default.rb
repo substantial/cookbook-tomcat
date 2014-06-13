@@ -54,7 +54,7 @@ when "centos","redhat","fedora","scientific"
     mode "0644"
     notifies :restart, resources(:service => "tomcat")
   end
-else  
+else
   template "/etc/default/tomcat6" do
     source "default_tomcat6.erb"
     owner "root"
@@ -66,6 +66,22 @@ end
 
 template "/etc/tomcat6/server.xml" do
   source "server.xml.erb"
+  owner "root"
+  group "root"
+  mode "0644"
+  notifies :restart, resources(:service => "tomcat")
+end
+
+directory node["tomcat"]["log_dir"] do
+  owner "tomcat"
+  group "root"
+  mode "0755"
+  recursive true
+  action :create
+end
+
+template "#{node["tomcat"]["base"]}/conf/logging.properties" do
+  source "logging.properties.erb"
   owner "root"
   group "root"
   mode "0644"
